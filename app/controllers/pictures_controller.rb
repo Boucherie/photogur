@@ -25,4 +25,25 @@ class PicturesController < ApplicationController
   def picture_params
     { title: params[:picture][:title], artist: params[:picture][:artist], url: params[:picture][:url] }
   end
+
+  def edit
+    @picture = Picture.find(params[:id])
+  end
+
+  def updated_at
+    @picture = Picture.find(params[:id])
+    #use the same picture_params method we used in created
+    if @picture.update_attributes(picture_params)
+      redirect_to "/pictures/#{picture.id}"
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @picture = Picture.find(params[:id])
+    @picture.destroy
+    redirect_to "/pictures"
+  end
+
 end
