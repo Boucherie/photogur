@@ -1,7 +1,16 @@
 <h1>Add a picture</h1>
 <%= link_to("Back to Pictures", "/pictures") %>
 
-
+<% if @picture.error.any? %>
+  <div id="error_msg">
+    <p><%= pluralize(@picture.errors.count, "error") %> prevented this photo from saving. </p>
+    <ul>
+      <%= @picture.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <%= form_for(@picture) do |f| %>
   <p>
@@ -17,4 +26,7 @@
   <p>
     <%= f.submit "Save" %>
   </p>
+
+
+
 <% end %>
