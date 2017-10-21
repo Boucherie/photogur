@@ -17,4 +17,9 @@ class SessionsController < ApplicationController
      session[:user_id] = nil
      redirect_to products_url, notice: "Logged out!"
    end
+
+   def sessions_params
+     params.require(:sessions).permit(:email, :password)
+   end
  end
+  params.require(:picture).permit(:name, :artist, :title, :url)
